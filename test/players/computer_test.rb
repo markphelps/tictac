@@ -30,6 +30,7 @@ module Tictac
       def test_random_move
         @board.stub :tiles, [1,2,3,nil,nil,6,nil,8,9] do
           refute_nil @player.random_move
+          assert (0..8).include? @player.random_move
         end
       end
 

@@ -36,7 +36,7 @@ module Tictac
 
       def random_move
         while true do
-          random_space = rand(8)
+          random_space = rand(9)
           if @board.space_available? random_space
             return random_space
           end
