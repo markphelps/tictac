@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require "tictac"
+
+game = Tictac::Game.new
+game.run
