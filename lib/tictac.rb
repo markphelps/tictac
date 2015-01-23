@@ -13,6 +13,7 @@ module Tictac
       usage
 
       while true
+        puts
         puts @game.board
 
         @player = @game.next_player

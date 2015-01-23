@@ -9,8 +9,7 @@ module Tictac
     end
 
     def move
-      tile = next_move
-      @board.tiles[tile] = marker
+      @board.tiles[next_move] = marker
     end
 
     def next_move

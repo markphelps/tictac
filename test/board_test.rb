@@ -10,6 +10,15 @@ module Tictac
       @board = Board.new
     end
 
+    def test_space_available?
+      @board.stub :tiles, TILES do
+        refute @board.space_available? 0
+      end
+      @board.stub :tiles, [nil, 1] do
+        assert @board.space_available? 0
+      end
+    end
+
     def test_moves
       @board.stub :tiles, TILES do
         assert_equal 9, @board.moves

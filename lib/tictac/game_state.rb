@@ -18,7 +18,7 @@ module Tictac
     end
 
     def tie?
-      board.tiles.compact.count == 9
+      board.moves == 9
     end
   end
 end

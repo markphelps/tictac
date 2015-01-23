@@ -4,7 +4,14 @@ module Tictac
   module Players
     class Computer < Tictac::Player
 
-      WINNING_PLACES = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [6, 4, 2]]
+      # [0][1][2]
+      # [3][4][5]
+      # [6][7][8]
+
+      # All spaces on board that will win
+      WINNING_SPACES = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
+
+      # Order in which we should check for wins
       WINNING_PRIORITIES = [[0, 1, 2], [0, 2, 1], [1, 2, 0]]
 
       def initialize(board)
@@ -12,13 +19,14 @@ module Tictac
       end
 
       def winning_move(player)
-        WINNING_PLACES.each do |place|
+        WINNING_SPACES.each do |space|
           WINNING_PRIORITIES.each do |priority|
-            # If player is in 2 of 3 winning places
-            if (@board.tiles[place[priority[0]]] == player) && (@board.tiles[place[priority[1]]] == player)
-              # Check if final winning place is available
-              if @board.tiles[place[priority[2]]].nil?
-                return place[priority[2]]
+            # If player is in 2 of 3 winning spaces
+            if (@board.tiles[space[priority[0]]] == player) && (@board.tiles[space[priority[1]]] == player)
+              # Check if final winning space is available
+              next_space = space[priority[2]]
+              if @board.space_available? next_space
+                return next_space
               end
             end
           end
@@ -28,9 +36,9 @@ module Tictac
 
       def random_move
         while true do
-          random_position = rand(8)
-          if @board.tiles[random_position].nil?
-            return random_position
+          random_space = rand(8)
+          if @board.space_available? random_space
+            return random_space
           end
         end
       end

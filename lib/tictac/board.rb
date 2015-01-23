@@ -15,6 +15,10 @@ module Tictac
       tiles.compact.count
     end
 
+    def space_available?(space)
+      tiles[space].nil?
+    end
+
     def rows
       rows = []
       (0).upto(2) { |n| rows << row(n) }
