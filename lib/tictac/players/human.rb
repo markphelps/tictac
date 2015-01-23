@@ -13,15 +13,18 @@ module Tictac
         valid = false
 
         while !valid
-          puts "Where to move?: "
-          input = gets.chomp
+          input = get_move
 
           quit if should_quit? input
           valid = validate input
-          puts "\nInvalid input.. please try again.".red unless valid
         end
 
         input.to_i
+      end
+
+      def get_move
+        puts "Where to move?: "
+        gets.chomp
       end
 
       def should_quit?(input)
@@ -29,7 +32,9 @@ module Tictac
       end
 
       def validate(input)
-        (0..8).include?(input.to_i) && @board.tiles[input.to_i].nil?
+        valid = (0..8).include?(input.to_i) && @board.tiles[input.to_i].nil?
+        puts "\nInvalid input.. please try again.".red unless valid
+        valid
       end
 
       def quit
