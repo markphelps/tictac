@@ -1,30 +1,47 @@
 # Tictac
 
-TODO: Write a gem description
+An un-winnable game of Tic Tac Toe. The AI will always win or tie. Sorry :(
+
+## Requirements
+- ruby ~> 2.1.2
+- bundler ~> 1.7
+- rake ~> 10.0
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Clone the source and cd into the project directory.
 
-```ruby
-gem 'tictac'
-```
+Then execute:
 
-And then execute:
+    $ bundle install
 
-    $ bundle
+Then build and install the gem:
 
-Or install it yourself as:
-
-    $ gem install tictac
+    $ rake install
 
 ## Usage
 
-TODO: Write usage instructions here
+The gem should install the 'tictac' binary.
 
+Just run:
+
+	$ tictac
+
+## Tests
+
+    $ rake test
+
+	# Running:
+
+	..................
+
+	Fabulous run in 0.004485s, 4013.3779 runs/s, 9810.4794 assertions/s.
+
+	18 runs, 44 assertions, 0 failures, 0 errors, 0 skips
+    
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/tictac/fork )
+1. Fork it ( https://github.com/markphelps/tictac/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
