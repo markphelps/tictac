@@ -35,7 +35,7 @@ module Tictac
 
       def test_validate
         out, err = capture_io do
-          refute @player.validate(-1)
+          refute @player.validate('')
         end
         assert_match %r%invalid%i, out
 
@@ -46,10 +46,12 @@ module Tictac
 
         @board.stub :tiles, [1,2] do
           out, err = capture_io do
-            refute @player.validate(1)
+            refute @player.validate('1')
           end
           assert_match %r%invalid%i, out
         end
+
+        assert @player.validate '1'
       end
     end
   end

@@ -32,7 +32,7 @@ module Tictac
       end
 
       def validate(input)
-        valid = (0..8).include?(input.to_i) && @board.space_available?(input.to_i)
+        valid = !input.empty? && (0..8).include?(input.to_i) && @board.space_available?(input.to_i)
         puts "\nInvalid input.. please try again.".red unless valid
         valid
       end
