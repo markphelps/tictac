@@ -33,11 +33,11 @@ Just run:
 
 	# Running:
 
-	..................
+	.......................
 
-	Fabulous run in 0.004485s, 4013.3779 runs/s, 9810.4794 assertions/s.
-
-	18 runs, 44 assertions, 0 failures, 0 errors, 0 skips
+    Fabulous run in 0.005212s, 4412.8933 runs/s, 10360.7061 assertions/s.
+    
+    23 runs, 54 assertions, 0 failures, 0 errors, 0 skips
     
 ## Contributing
 
