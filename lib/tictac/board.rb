@@ -1,58 +1,72 @@
 module Tictac
   class Board
 
-    attr_reader :tiles
+    attr_reader :spaces
 
     # [0][1][2]
     # [3][4][5]
     # [6][7][8]
 
+    WINNING_COMBINATIONS = [
+      # Horizontal wins:
+      [0, 1, 2], [3, 4, 5], [6, 7, 8],
+      # Vertical wins:
+      [0, 3, 6], [1, 4, 7], [2, 5, 8],
+      # Diagonal wins:
+      [0, 4, 8], [2, 4, 6]
+    ]
+
     def initialize
-      @tiles = []
+      @spaces = Array.new(9)
     end
 
     def moves
-      tiles.compact.count
+      spaces.compact.count
+    end
+
+    def place_piece(space, piece)
+      spaces[space] = piece
+    end
+
+    def valid_move?(space)
+      (0..8).include?(space) && space_available?(space)
     end
 
     def space_available?(space)
-      tiles[space].nil?
+      spaces[space].nil?
     end
 
-    def rows
-      rows = []
-      (0).upto(2) { |n| rows << row(n) }
-      rows
+    def available_spaces
+      available = []
+      spaces.each_index do |i|
+        available << i if space_available? i
+      end
+      available
     end
 
-    def diagonals
-      [ [ tiles[0], tiles[4], tiles[8] ], [ tiles[6], tiles[4], tiles[2] ] ]
-    end
-
-    def columns
-      cols = []
-      (0).upto(2) { |n| cols << column(n) }
-      cols
-    end
-
-    def row(row)
-      [ tiles[row * 3], tiles[(row * 3) + 1], tiles[(row * 3) + 2] ]
-    end
-
-    def column(column)
-      [ tiles[column], tiles[column + 3], tiles[column + 6]]
-    end
-
-    def to_s
-      output = ""
-      0.upto(8) do |position|
-        output << " #{tiles[position] || position} "
-        case position % 3
-        when 0, 1 then output << "|"
-        when 2 then output << "\n-----------\n" unless position == 8
+    def winning_combination
+      WINNING_COMBINATIONS.each do |combo|
+        if spaces[combo[0]] == spaces[combo[1]] && spaces[combo[1]] == spaces[combo[2]]
+          return combo unless spaces[combo[0]].nil?
         end
       end
-      output
+      false
+    end
+
+    def winner
+      combo = winning_combination
+      combo ? spaces[combo[0]] : false
+    end
+
+    def tie?
+      available_spaces.empty?
+    end
+
+    private
+
+    def initialize_dup(other)
+      super other
+      @spaces = other.spaces.dup
     end
   end
 end

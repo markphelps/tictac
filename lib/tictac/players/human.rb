@@ -1,45 +1,35 @@
 require 'tictac/player'
-require 'colorize'
 
 module Tictac
   module Players
     class Human < Tictac::Player
 
-      def initialize(board)
-        super('X', board)
-      end
-
-      def next_move
+      def move(board)
         valid = false
 
-        while !valid
+        until valid
           input = get_move
-
           quit if should_quit? input
-          valid = validate input
+          valid = validate input, board
         end
 
-        input.to_i
-      end
-
-      def get_move
-        puts "Where to move?: "
-        gets.chomp
+        board.place_piece input.to_i, piece
       end
 
       def should_quit?(input)
         input =~ /q/i
       end
 
-      def validate(input)
-        valid = !input.empty? && (0..8).include?(input.to_i) && @board.space_available?(input.to_i)
-        puts "\nInvalid input.. please try again.".red unless valid
+      def validate(input, board)
+        valid = !input.empty? && board.valid_move?(input.to_i)
+        invalid_input unless valid
         valid
       end
 
-      def quit
-        puts "\nThanks for playing!".green
-        abort
+      private
+
+      def method_missing(method, *args)
+        UI.send(method, *args)
       end
     end
   end

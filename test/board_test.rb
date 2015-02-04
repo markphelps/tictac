@@ -4,61 +4,87 @@ require 'tictac/board'
 module Tictac
   class BoardTest < MiniTest::Test
 
-    TILES = [1,2,3,4,5,6,7,8,9]
+    SPACES = (1..9).to_a
 
     def setup
       @board = Board.new
     end
 
-    def test_space_available?
-      @board.stub :tiles, TILES do
-        refute @board.space_available? 0
-      end
-      @board.stub :tiles, [nil, 1] do
-        assert @board.space_available? 0
-      end
-    end
-
     def test_moves
-      @board.stub :tiles, TILES do
+      @board.stub :spaces, SPACES do
         assert_equal 9, @board.moves
       end
-      @board.stub :tiles, [nil, 1] do
+
+      @board.stub :spaces, [nil, 1] do
         assert_equal 1, @board.moves
       end
     end
 
-    def test_row
-      @board.stub :tiles, TILES do
-        assert_equal [1,2,3], @board.row(0)
-        assert_equal [4,5,6], @board.row(1)
-        assert_equal [7,8,9], @board.row(2)
+    def test_place_piece
+      @board.place_piece 0, 'X'
+      assert_equal 'X', @board.spaces[0]
+    end
+
+    def test_valid_move?
+      assert @board.valid_move? 0
+      refute @board.valid_move? 10
+
+      @board.stub :space_available?, false do
+        refute @board.valid_move? 0
       end
     end
 
-    def test_column
-      @board.stub :tiles, TILES do
-        assert_equal [1,4,7], @board.column(0)
-        assert_equal [2,5,8], @board.column(1)
-        assert_equal [3,6,9], @board.column(2)
+    def test_space_available?
+      @board.stub :spaces, SPACES do
+        refute @board.space_available? 0
+      end
+
+      @board.stub :spaces, [nil, 1] do
+        assert @board.space_available? 0
       end
     end
 
-    def test_rows
-      @board.stub :tiles, TILES do
-        assert_equal [[1,2,3], [4,5,6], [7,8,9]], @board.rows
+    def test_available_spaces
+      assert_equal 9, @board.available_spaces.size
+
+      @board.stub :spaces, SPACES do
+        assert_equal 0, @board.available_spaces.size
       end
     end
 
-    def test_columns
-      @board.stub :tiles, TILES do
-        assert_equal [[1,4,7], [2,5,8], [3,6,9]], @board.columns
+    def test_winning_combination
+      @board.stub :spaces, ['X', 'X', 'X'] do
+        assert_equal [0,1,2], @board.winning_combination
+      end
+
+      @board.stub :spaces, ['X', 'O', 'X'] do
+        refute @board.winning_combination
+      end
+
+      @board.stub :spaces, ['X', 'O', nil] do
+        refute @board.winning_combination
       end
     end
 
-    def test_diagonals
-      @board.stub :tiles, TILES do
-        assert_equal [[1,5,9], [7,5,3]], @board.diagonals
+    def test_winner
+      @board.stub :winning_combination, [0,1,2] do
+        @board.stub :spaces, ['X', 'X', 'X'] do
+          assert_equal 'X', @board.winner
+        end
+      end
+
+      @board.stub :winning_combination, false do
+        refute @board.winner
+      end
+    end
+
+    def test_tie?
+      @board.stub :available_spaces, [] do
+        assert @board.tie?
+      end
+
+      @board.stub :available_spaces, [1] do
+        refute @board.tie?
       end
     end
   end

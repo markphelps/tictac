@@ -1,28 +1,18 @@
 module Tictac
   class Player
 
-    attr_reader :marker
+    attr_reader :piece
 
-    def initialize(marker, board)
-      @marker = marker
-      @board = board
+    def initialize(piece)
+      @piece = piece
     end
 
-    def move
-      @board.tiles[next_move] = marker
-    end
-
-    def next_move
-      raise NotImplementedError
-    end
-
-    def winner?
-      won = Proc.new {|tiles| tiles.all? { |t| t == marker }}
-      @board.rows.any?(&won) || @board.columns.any?(&won) || @board.diagonals.any?(&won)
+    def move(board)
+      raise 'Not Implemented'
     end
 
     def to_s
-      @marker
+      piece
     end
   end
 end

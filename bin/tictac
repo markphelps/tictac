@@ -3,4 +3,4 @@
 require "tictac"
 
 game = Tictac::Game.new
-game.run
+game.play

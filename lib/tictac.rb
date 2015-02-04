@@ -1,62 +1,49 @@
 require 'tictac/version'
-require 'tictac/game_state'
+require 'tictac/players/min_max'
+require 'tictac/players/human'
+require 'tictac/board'
+require 'tictac/ui'
 require 'colorize'
 
 module Tictac
   class Game
 
+    attr_reader :board, :human, :computer
+
     def initialize
-      @game = GameState.new
+      @board = Board.new
+      @human = Players::Human.new 'X'
+      @computer = Players::MinMax.new 'O'
     end
 
-    def run
+    def play
+      banner
       usage
 
+      display_board board
+
+      player, opponent = human, computer
+
       while true
-        puts
-        puts @game.board
+        turn player
 
-        @player = @game.next_player
+        thinking player if player == computer
 
-        puts "\nPlayer #{@player}'s turn".yellow
+        player.move board
 
-        @player.move
+        display_board board
 
-        won if @player.winner?
-        tie if @game.tie?
+        quit { won player } if board.winner
+        quit { tie } if board.tie?
+
+        player, opponent = opponent, player
       end
     end
 
     private
 
-    def won
-      quit { "\nPlayer #{@player} WINS!".green }
-    end
-
-    def tie
-      quit { "\nIt's a DRAW!".yellow }
-    end
-
-    def quit
-      puts yield
-      puts
-      puts @game.board
-      abort
-    end
-
-    def usage
-      puts %q[
-      ___________ .__        __
-      \__    ___/ |__| _____/  |______    ____
-         |    |   |  |/ ___\   __\__  \ _/ ___\
-         |    |   |  \  \___|  |  / __ \  \___
-         |____|   |__|\___  >__| (____  /\___  >
-                          \/          \/     \/].green
-
-      puts "Lets play Tic Tac Toe!"
-      puts "\nEnter the coordinates for where you want to move".yellow
-      puts "Ex: '0' would move you to the 1st column, 1st row"
-      puts "\nPress 'q' to Quit"
+    def method_missing(method, *args)
+      UI.send(method, *args)
     end
   end
 end

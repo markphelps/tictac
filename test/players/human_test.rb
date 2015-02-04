@@ -8,20 +8,17 @@ module Tictac
 
       def setup
         @board = Board.new
-        @player = Human.new @board
+        @player = Human.new 'X'
       end
 
-      def test_marker
-        assert_equal 'X', @player.marker
+      def test_piece
+        assert_equal 'X', @player.piece
       end
 
-      def test_next_move
-        @player.stub :get_move, 5 do
-          @player.stub :should_quit?, false do
-            @player.stub :validate, true do
-              assert_equal 5, @player.next_move
-            end
-          end
+      def test_move
+        UI.stub :get_move, '1' do
+          @player.move @board
+          assert_equal @player.piece, @board.spaces[1]
         end
       end
 
@@ -35,23 +32,23 @@ module Tictac
 
       def test_validate
         out, err = capture_io do
-          refute @player.validate('')
+          refute @player.validate '', @board
         end
         assert_match %r%invalid%i, out
 
         out, err = capture_io do
-          refute @player.validate('-1')
+          refute @player.validate '-1', @board
         end
         assert_match %r%invalid%i, out
 
-        @board.stub :tiles, [1,2] do
+        @board.stub :spaces, [1,2] do
           out, err = capture_io do
-            refute @player.validate('1')
+            refute @player.validate '1', @board
           end
           assert_match %r%invalid%i, out
         end
 
-        assert @player.validate '1'
+        assert @player.validate '1', @board
       end
     end
   end
