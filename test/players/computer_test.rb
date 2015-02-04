@@ -15,70 +15,69 @@ module Tictac
         assert_equal 'O', @player.marker
       end
 
-      def test_next_move
-        @player.stub :first_move?, true do
-          # should call opening_move and return center
-          assert_equal Computer::CENTER, @player.next_move
-        end
-
-        @player.stub :try_winning_move, 1 do
-          assert_equal 1, @player.next_move
-        end
-
-        @player.stub :try_winning_move, 2 do
-          assert_equal 2, @player.next_move
-        end
-
-        @player.stub :try_until_available, 8 do
-          assert_equal 8, @player.next_move
-        end
-      end
-
-      def test_try_winning_move
+      def test_attack
         @board.stub :tiles, ['O','O',nil] do
-          assert_equal 2, @player.try_winning_move('O')
+          assert_equal 2, @player.attack
         end
         @board.stub :tiles, ['O','O','O'] do
-          refute @player.try_winning_move('O')
+          refute @player.attack
         end
         @board.stub :tiles, ['O','X', nil] do
-          refute @player.try_winning_move('O')
+          refute @player.attack
         end
       end
 
-      def test_first_move?
-        @board.stub :moves, 2 do
-          refute @player.first_move?
+      def test_block
+        @board.stub :tiles, ['X','X',nil] do
+          assert_equal 2, @player.block
         end
-        @board.stub :moves, 1 do
-          assert @player.first_move?
+        @board.stub :tiles, ['O','O','O'] do
+          refute @player.block
         end
-      end
-
-      def test_opening_move
-        @board.stub :space_available?, true do
-          assert_equal Computer::CENTER, @player.opening_move
-        end
-
-        @board.stub :space_available?, false do
-          @player.stub :try_until_available, 1 do
-            assert_equal 1, @player.opening_move
-          end
+        @board.stub :tiles, ['O','X', nil] do
+          refute @player.block
         end
       end
 
-      def test_random_corner
-        assert Computer::CORNERS.include? @player.random_corner
-      end
-
-      def test_random_space
-        assert (0..9).include? @player.random_space
-      end
-
-      def test_try_until_available
-        @board.stub :tiles, [1,2,3,nil] do
-          assert_equal 3, @player.try_until_available { rand(4) }
+      def test_create_fork
+        @board.stub :tiles, ['O',nil,'O',nil,nil,nil,nil,nil,'O'] do
+          assert_equal 6, @player.create_fork
         end
+      end
+
+      def test_block_fork
+        @board.stub :tiles, ['X',nil,'X',nil,nil,nil,nil,nil,'X'] do
+          assert_equal 6, @player.block_fork
+        end
+      end
+
+      def test_center
+        @board.stub :tiles, ['O',nil,'O',nil,nil] do
+          assert_equal 4, @player.center
+        end
+        @board.stub :tiles, ['O',nil,'O',nil,'X'] do
+          refute @player.center
+        end
+      end
+
+      def test_opposite_corner
+        @board.stub :tiles, ['X',nil,'O',nil,nil,nil,nil,'X',nil] do
+          assert_equal 8, @player.opposite_corner
+        end
+      end
+
+      def test_force_defend
+        @board.stub :tiles, ['X',nil,nil,nil,'O',nil,nil,nil,'X'] do
+          assert @player.force_defend
+        end
+      end
+
+      def test_empty_corner
+        assert Computer::CORNERS.include? @player.empty_corner
+      end
+
+      def test_empty_edge
+        assert Computer::EDGES.include? @player.empty_edge
       end
     end
   end

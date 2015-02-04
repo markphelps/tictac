@@ -90,26 +90,21 @@ module Tictac
         end
       end
 
+      private
       def fork_move(player)
-        FORK_SPACES.each do |space|
-          PRIORITIES.each do |priority|
-            # If player is in 2 of 3 fork spaces
-            if (@board.tiles[space[priority[0]]] == player) && (@board.tiles[space[priority[1]]] == player)
-              # Check if final winning space is available
-              next_space = space[priority[2]]
-              return next_space if @board.space_available? next_space
-            end
-          end
-        end
-        nil
+        try_move player, FORK_SPACES
       end
 
       def winning_move(player)
-        WINNING_SPACES.each do |space|
+        try_move player, WINNING_SPACES
+      end
+
+      def try_move(player, spaces)
+        spaces.each do |space|
           PRIORITIES.each do |priority|
-            # If player is in 2 of 3 winning spaces
+            # If player is in 2 of fork spaces
             if (@board.tiles[space[priority[0]]] == player) && (@board.tiles[space[priority[1]]] == player)
-              # Check if final winning space is available
+              # Check if final space is available
               next_space = space[priority[2]]
               return next_space if @board.space_available? next_space
             end
