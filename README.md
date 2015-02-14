@@ -2,6 +2,8 @@
 
 An un-winnable game of Tic Tac Toe. The AI will always win or tie. Sorry :(
 
+AI uses the [MinMax](http://en.wikipedia.org/wiki/Minimax) algorithm. 
+
 ## Requirements
 - ruby ~> 2.1.2
 - bundler ~> 1.7
