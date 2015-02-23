@@ -7,8 +7,9 @@ module Tictac
     class HumanTest < MiniTest::Test
 
       def setup
+        @ui = UI.new
         @board = Board.new
-        @player = Human.new 'X'
+        @player = Human.new 'X', @ui
       end
 
       def test_piece
@@ -16,7 +17,7 @@ module Tictac
       end
 
       def test_move
-        UI.stub :get_move, '1' do
+        @ui.stub :get_move, '1' do
           @player.move @board
           assert_equal @player.piece, @board.spaces[1]
         end

@@ -1,4 +1,5 @@
 require 'tictac/player'
+require 'tictac/ui'
 
 module Tictac
   module Players
@@ -8,8 +9,8 @@ module Tictac
         valid = false
 
         until valid
-          input = get_move
-          quit if should_quit? input
+          input = ui.get_move
+          ui.quit if should_quit? input
           valid = validate input, board
         end
 
@@ -22,14 +23,8 @@ module Tictac
 
       def validate(input, board)
         valid = !input.empty? && board.valid_move?(input.to_i)
-        invalid_input unless valid
+        ui.invalid_input unless valid
         valid
-      end
-
-      private
-
-      def method_missing(method, *args)
-        UI.send(method, *args)
       end
     end
   end

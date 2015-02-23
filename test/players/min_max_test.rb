@@ -7,8 +7,9 @@ module Tictac
     class MinMaxTest < MiniTest::Test
 
       def setup
+        @ui = UI.new
         @board = Board.new
-        @player = MinMax.new 'X'
+        @player = MinMax.new 'X', @ui
       end
 
       def test_move

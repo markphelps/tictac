@@ -8,42 +8,35 @@ require 'colorize'
 module Tictac
   class Game
 
-    attr_reader :board, :human, :computer
+    attr_reader :board, :human, :computer, :ui
 
     def initialize
+      @ui = UI.new
       @board = Board.new
-      @human = Players::Human.new 'X'
-      @computer = Players::MinMax.new 'O'
+      @human = Players::Human.new 'X', @ui
+      @computer = Players::MinMax.new 'O', @ui
     end
 
     def play
-      banner
-      usage
+      ui.banner
+      ui.usage
 
-      display_board board
+      ui.display_board board
 
       player, opponent = human, computer
 
       while true
-        turn player
-
-        thinking player if player == computer
+        ui.turn player
 
         player.move board
 
-        display_board board
+        ui.display_board board
 
-        quit { won player } if board.winner
-        quit { tie } if board.tie?
+        ui.quit { ui.won player } if board.winner
+        ui.quit { ui.tie } if board.tie?
 
         player, opponent = opponent, player
       end
-    end
-
-    private
-
-    def method_missing(method, *args)
-      UI.send(method, *args)
     end
   end
 end

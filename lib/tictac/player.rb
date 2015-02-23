@@ -1,10 +1,10 @@
 module Tictac
   class Player
 
-    attr_reader :piece
+    attr_reader :piece, :ui
 
-    def initialize(piece)
-      @piece = piece
+    def initialize(piece, ui)
+      @piece, @ui = piece, ui
     end
 
     def move(board)

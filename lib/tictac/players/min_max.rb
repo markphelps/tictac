@@ -1,17 +1,17 @@
 require 'tictac/player'
 require 'tictac/board'
-require 'colorize'
 
 module Tictac
   module Players
     class MinMax < Tictac::Player
 
-      def initialize(piece)
-        super piece
+      def initialize(piece, ui)
+        super piece, ui
         @opponent = switch piece
       end
 
       def move(board)
+        ui.thinking piece
         minmax board, piece
         board.place_piece @best_choice, piece
       end
