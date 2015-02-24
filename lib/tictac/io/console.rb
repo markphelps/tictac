@@ -36,7 +36,7 @@ module Tictac
       def display_board(board)
         output = "\n"
         0.upto(8) do |position|
-          output << " #{board.spaces[position] || position} "
+          output << color(board, position)
           case position % 3
           when 0, 1 then output << "|"
           when 2 then output << "\n-----------\n" unless position == 8
@@ -64,6 +64,17 @@ module Tictac
         puts "\nThanks for playing!".green
         abort
       end
+
+      private
+
+      def color(board, position)
+        if board.spaces[position]
+          " #{board.spaces[position]} "
+        else
+          " #{position} ".light_black
+        end
+      end
+
     end
   end
 end
