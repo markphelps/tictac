@@ -4,12 +4,11 @@ require 'tictac/ui'
 module Tictac
   module Players
     class Human < Tictac::Player
-
       def move(board)
         valid = false
 
         until valid
-          input = ui.get_move
+          input = ui.move
           ui.quit if should_quit? input
           valid = validate input, board
         end

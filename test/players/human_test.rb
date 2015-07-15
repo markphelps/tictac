@@ -5,7 +5,6 @@ require 'tictac/players/human'
 module Tictac
   module Players
     class HumanTest < MiniTest::Test
-
       def setup
         @ui = UI.new
         @board = Board.new
@@ -17,7 +16,7 @@ module Tictac
       end
 
       def test_move
-        @ui.stub :get_move, '1' do
+        @ui.stub :move, '1' do
           @player.move @board
           assert_equal @player.piece, @board.spaces[1]
         end
@@ -42,7 +41,7 @@ module Tictac
         end
         assert_match %r%invalid%i, out
 
-        @board.stub :spaces, [1,2] do
+        @board.stub :spaces, [1, 2] do
           out, err = capture_io do
             refute @player.validate '1', @board
           end

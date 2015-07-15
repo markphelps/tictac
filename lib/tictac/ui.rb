@@ -2,7 +2,6 @@ require 'tictac/io/console'
 
 module Tictac
   class UI
-
     attr_reader :delegate
 
     def initialize(delegate = IO::Console.new)
@@ -37,8 +36,8 @@ module Tictac
       delegate.invalid_input
     end
 
-    def get_move
-      delegate.get_move
+    def move
+      delegate.move
     end
 
     def thinking(player)
@@ -46,7 +45,7 @@ module Tictac
     end
 
     def quit(&block)
-      delegate.quit &block
+      delegate.quit(&block)
     end
   end
 end

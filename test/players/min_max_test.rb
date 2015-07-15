@@ -5,7 +5,6 @@ require 'tictac/players/min_max'
 module Tictac
   module Players
     class MinMaxTest < MiniTest::Test
-
       def setup
         @ui = UI.new
         @board = Board.new

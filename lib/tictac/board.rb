@@ -1,6 +1,5 @@
 module Tictac
   class Board
-
     attr_reader :spaces
 
     # [0][1][2]

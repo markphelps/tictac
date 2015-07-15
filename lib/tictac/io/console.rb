@@ -3,7 +3,6 @@ require 'colorize'
 module Tictac
   module IO
     class Console
-
       def banner
         puts %q[
         ___________ .__        __
@@ -49,7 +48,7 @@ module Tictac
         puts "\nInvalid input.. please try again.".red
       end
 
-      def get_move
+      def move
         print "Where to move? : "
         gets.chomp
       end
@@ -74,7 +73,6 @@ module Tictac
           " #{position} ".light_black
         end
       end
-
     end
   end
 end

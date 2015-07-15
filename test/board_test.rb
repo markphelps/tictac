@@ -3,7 +3,6 @@ require 'tictac/board'
 
 module Tictac
   class BoardTest < MiniTest::Test
-
     SPACES = (1..9).to_a
 
     def setup
@@ -54,7 +53,7 @@ module Tictac
 
     def test_winning_combination
       @board.stub :spaces, ['X', 'X', 'X'] do
-        assert_equal [0,1,2], @board.winning_combination
+        assert_equal [0, 1, 2], @board.winning_combination
       end
 
       @board.stub :spaces, ['X', 'O', 'X'] do
@@ -67,7 +66,7 @@ module Tictac
     end
 
     def test_winner
-      @board.stub :winning_combination, [0,1,2] do
+      @board.stub :winning_combination, [0, 1, 2] do
         @board.stub :spaces, ['X', 'X', 'X'] do
           assert_equal 'X', @board.winner
         end

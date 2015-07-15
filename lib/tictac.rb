@@ -7,7 +7,6 @@ require 'colorize'
 
 module Tictac
   class Game
-
     attr_reader :board, :human, :computer, :ui
 
     def initialize
