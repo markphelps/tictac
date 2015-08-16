@@ -38,7 +38,7 @@ module Tictac
     def available_spaces
       available = []
       spaces.each_index do |i|
-        available << i if space_available? i
+        available << i if space_available?(i)
       end
       available
     end
@@ -64,7 +64,7 @@ module Tictac
     private
 
     def initialize_dup(other)
-      super other
+      super(other)
       @spaces = other.spaces.dup
     end
   end

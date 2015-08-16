@@ -17,11 +17,11 @@ module Tictac
     end
 
     def turn(player)
-      delegate.turn player
+      delegate.turn(player)
     end
 
     def won(player)
-      delegate.won player
+      delegate.won(player)
     end
 
     def tie
@@ -29,7 +29,7 @@ module Tictac
     end
 
     def display_board(board)
-      delegate.display_board board
+      delegate.display_board(board)
     end
 
     def invalid_input
@@ -41,7 +41,7 @@ module Tictac
     end
 
     def thinking(player)
-      delegate.thinking player
+      delegate.thinking(player)
     end
 
     def quit(&block)

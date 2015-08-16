@@ -6,7 +6,7 @@ module Tictac
       @piece, @ui = piece, ui
     end
 
-    def move(_board)
+    def move(board)
       raise 'Not Implemented'
     end
 

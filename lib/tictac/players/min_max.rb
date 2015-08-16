@@ -4,31 +4,33 @@ require 'tictac/board'
 module Tictac
   module Players
     class MinMax < Tictac::Player
+      attr_reader :best_choice
+
       def initialize(piece, ui)
-        super piece, ui
-        @opponent = switch piece
+        super(piece, ui)
+        @opponent = switch(piece)
       end
 
       def move(board)
-        ui.thinking piece
-        minmax board, piece
-        board.place_piece @best_choice, piece
+        ui.thinking(piece)
+        minmax(board, piece)
+        board.place_piece(best_choice, piece)
       end
 
       def minmax(board, current_player)
-        return score board if game_over? board
+        return score(board) if game_over?(board)
 
         scores = {}
 
         board.available_spaces.each do |space|
           # Copy board so we don't mess up original
           potential_board = board.dup
-          potential_board.place_piece space, current_player
+          potential_board.place_piece(space, current_player)
 
           scores[space] = minmax(potential_board, switch(current_player))
         end
 
-        @best_choice, best_score = best_move current_player, scores
+        @best_choice, best_score = best_move(current_player, scores)
         best_score
       end
 

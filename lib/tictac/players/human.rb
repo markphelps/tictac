@@ -9,11 +9,11 @@ module Tictac
 
         until valid
           input = ui.move
-          ui.quit if should_quit? input
-          valid = validate input, board
+          ui.quit if should_quit?(input)
+          valid = validate(input, board)
         end
 
-        board.place_piece input.to_i, piece
+        board.place_piece(input.to_i, piece)
       end
 
       def should_quit?(input)
