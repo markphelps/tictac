@@ -2,10 +2,11 @@
 
 An un-winnable game of Tic Tac Toe. The AI will always win or tie. Sorry :(
 
-AI uses the [MinMax](http://en.wikipedia.org/wiki/Minimax) algorithm. 
+AI uses the [MinMax](http://en.wikipedia.org/wiki/Minimax) algorithm.
 
 ## Requirements
-- ruby ~> 2.1.2
+
+- ruby ~> 2.2.3
 - bundler ~> 1.7
 - rake ~> 10.0
 
@@ -38,9 +39,9 @@ Just run:
 	.......................
 
     Fabulous run in 0.005212s, 4412.8933 runs/s, 10360.7061 assertions/s.
-    
+
     23 runs, 54 assertions, 0 failures, 0 errors, 0 skips
-    
+
 ## Contributing
 
 1. Fork it ( https://github.com/markphelps/tictac/fork )
