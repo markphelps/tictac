@@ -4,6 +4,8 @@ An un-winnable game of Tic Tac Toe. The AI will always win or tie. Sorry :(
 
 AI uses the [MinMax](http://en.wikipedia.org/wiki/Minimax) algorithm.
 
+https://codeship.com/projects/253504e0-fc11-0132-004d-46c0998097e0/status?branch=master
+
 ## Requirements
 
 - ruby ~> 2.2.3
