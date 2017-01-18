@@ -4,6 +4,31 @@ An un-winnable game of Tic Tac Toe. The AI will always win or tie.
 
 AI uses the [MinMax](http://en.wikipedia.org/wiki/Minimax) algorithm.
 
+```
+        ___________ .__        __
+        \__    ___/ |__| _____/  |______    ____
+           |    |   |  |/ ___\   __\__  \ _/ ___\
+           |    |   |  \  \___|  |  / __ \  \___
+           |____|   |__|\___  >__| (____  /\___  >
+                            \/          \/     \/
+Lets play Tic Tac Toe!
+
+Enter the coordinates for where you want to move
+Ex: '0' would move you to the 1st column, 1st row
+
+Press 'q' to Quit
+
+ 0 | 1 | 2
+-----------
+ 3 | 4 | 5
+-----------
+ 6 | 7 | 8
+
+Player X's turn
+Where to move? :
+
+```
+
 [ ![Codeship Status for markphelps/tictac](https://codeship.com/projects/e92d4f40-bfc1-0134-613e-0ea17c17ebe1/status?branch=master)](https://codeship.com/projects/196712)
 
 `$ git clone https://github.com/markphelps/tictac.git`
