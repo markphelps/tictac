@@ -47,12 +47,6 @@ Run interactively:
 
 ### Local
 
-Requirements:
-
-- ruby ~> 2.2.3
-- bundler ~> 1.7
-- rake ~> 10.0
-
 Install dependencies:
 
     $ bundle install
