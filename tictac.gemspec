@@ -9,17 +9,17 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Mark Phelps"]
   spec.email         = ["mark.aaron.phelps@gmail.com"]
   spec.summary       = %q{A game of Tic Tac Toe.}
-  spec.homepage      = ""
+  spec.homepage      = %q{https://github.com/markphelps/tictac}
   spec.license       = "MIT"
 
-  spec.files         = `git ls-files -z`.split("\x0")
+  spec.files         = Dir.glob("{bin,lib}/**/*")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
+  spec.test_files    = spec.files.grep(%r{^test/})
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency "colorize", "~> 0.7.5"
+  spec.add_runtime_dependency "colorize", "~> 0.8.1"
 
-  spec.add_development_dependency "bundler", "~> 1.7"
-  spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "minitest", "~> 5.5.1"
+  spec.add_development_dependency "bundler", "~> 1.13"
+  spec.add_development_dependency "rake", "~> 11.3.0"
+  spec.add_development_dependency "minitest", "~> 5.10.1"
 end
