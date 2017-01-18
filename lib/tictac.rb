@@ -5,6 +5,8 @@ require 'tictac/board'
 require 'tictac/ui'
 require 'colorize'
 
+trap("SIGINT") { exit! }
+
 module Tictac
   class Game
     attr_reader :board, :human, :computer, :ui

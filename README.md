@@ -1,32 +1,44 @@
 # Tictac
 
-An un-winnable game of Tic Tac Toe. The AI will always win or tie. Sorry :(
+An un-winnable game of Tic Tac Toe. The AI will always win or tie.
 
 AI uses the [MinMax](http://en.wikipedia.org/wiki/Minimax) algorithm.
 
 [ ![Codeship Status for markphelps/tictac](https://codeship.com/projects/253504e0-fc11-0132-004d-46c0998097e0/status?branch=master)](https://codeship.com/projects/87387)
 
-## Requirements
+## Running
+
+### Docker
+
+Build the image:
+
+	$ docker build -t tictac .
+
+Run interactively:
+
+	$ docker run -it tictac
+
+### Local
+
+Requirements:
 
 - ruby ~> 2.2.3
 - bundler ~> 1.7
 - rake ~> 10.0
 
-## Installation
+Clone:
 
-Clone the source and cd into the project directory.
+	$ git clone https://github.com/markphelps/tictac.git
 
-Then execute:
+Install dependencies:
 
     $ bundle install
 
-Then build and install the gem:
+Build and install the gem:
 
-    $ rake install
+    $ bundle exec rake install
 
-## Usage
-
-The gem should install the 'tictac' binary.
+The gem will install the 'tictac' binary.
 
 Just run:
 
