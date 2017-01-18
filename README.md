@@ -4,7 +4,7 @@ An un-winnable game of Tic Tac Toe. The AI will always win or tie.
 
 AI uses the [MinMax](http://en.wikipedia.org/wiki/Minimax) algorithm.
 
-[ ![Codeship Status for markphelps/tictac](https://codeship.com/projects/253504e0-fc11-0132-004d-46c0998097e0/status?branch=master)](https://codeship.com/projects/87387)
+[ ![Codeship Status for markphelps/tictac](https://codeship.com/projects/e92d4f40-bfc1-0134-613e-0ea17c17ebe1/status?branch=master)](https://codeship.com/projects/196712)
 
 ## Running
 
