@@ -6,6 +6,8 @@ AI uses the [MinMax](http://en.wikipedia.org/wiki/Minimax) algorithm.
 
 [ ![Codeship Status for markphelps/tictac](https://codeship.com/projects/e92d4f40-bfc1-0134-613e-0ea17c17ebe1/status?branch=master)](https://codeship.com/projects/196712)
 
+`$ git clone https://github.com/markphelps/tictac.git`
+
 ## Running
 
 ### Docker
@@ -25,10 +27,6 @@ Requirements:
 - ruby ~> 2.2.3
 - bundler ~> 1.7
 - rake ~> 10.0
-
-Clone:
-
-	$ git clone https://github.com/markphelps/tictac.git
 
 Install dependencies:
 
